@@ -90,6 +90,22 @@ public class Lifesteal extends JavaPlugin { // Class name matches 'main' in plug
             getLogger().warning("Could not register /lifestealreset programmatically!");
         }
 
+        // Inside Lifesteal.java's onEnable() method
+
+        boolean resetPlayerHeartsRegistered = Bukkit.getCommandMap().register(this.getDescription().getName().toLowerCase(), new ResetPlayerHeartsCommand(this));
+        if (resetPlayerHeartsRegistered) {
+            getLogger().info("/resethearts command registered programmatically.");
+        } else {
+            getLogger().warning("Could not register /resethearts programmatically!");
+        }
+
+        boolean checkHealthRegistered = Bukkit.getCommandMap().register(this.getDescription().getName().toLowerCase(), new CheckHealthCommand(this));
+        if (checkHealthRegistered) {
+            getLogger().info("/checkhealth command registered programmatically.");
+        } else {
+            getLogger().warning("Could not register /checkhealth programmatically!");
+        }
+
 
 
     }
