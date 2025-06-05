@@ -1,0 +1,7 @@
+name: Lifesteal
+version: '1.0-SNAPSHOT'
+main: org.olavorw.lifesteal.Lifesteal
+api-version: '1.21'
+authors: [ Olavorw ]
+description: A Lifesteal plugin for your server
+website: olavorw.com
