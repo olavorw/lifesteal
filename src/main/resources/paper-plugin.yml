@@ -5,3 +5,11 @@ api-version: '1.21'
 authors: [ Olavorw ]
 description: A Lifesteal plugin for your server
 website: olavorw.com
+
+permissions:
+  lifesteal.admin:
+    description: Grants access to Lifesteal administrative commands.
+    default: op
+  lifesteal.player.withdraw:
+    description: Allows players to use the /withdrawheart command.
+    default: true
