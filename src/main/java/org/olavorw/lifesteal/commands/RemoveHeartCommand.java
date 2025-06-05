@@ -6,7 +6,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.olavorw.lifesteal.Lifesteal; // Your main plugin class
+import org.olavorw.lifesteal.Lifesteal; 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -86,10 +86,10 @@ public class RemoveHeartCommand extends CommandBase {
             return Collections.emptyList();
         }
         if (args.length == 1) {
-            return null; // Player name completion
+            return null; 
         }
         if (args.length == 2) {
-            return Arrays.asList("1", "2", "5"); // Suggest amounts
+            return Arrays.asList("1", "2", "5"); 
         }
         return Collections.emptyList();
     }

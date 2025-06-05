@@ -6,8 +6,8 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.olavorw.lifesteal.ItemManager; // Your ItemManager class
-import org.olavorw.lifesteal.Lifesteal;   // Your main plugin class
+import org.olavorw.lifesteal.ItemManager; 
+import org.olavorw.lifesteal.Lifesteal;   
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -22,8 +22,8 @@ public class WithdrawHeartCommand extends CommandBase {
                 "withdrawheart",
                 "Withdraws hearts from your health bar into Heart items.",
                 "/withdrawheart [amount]",
-                Arrays.asList("wh", "takemyheart"), // Aliases
-                "lifesteal.player.withdraw" // Permission (default: true from paper-plugin.yml)
+                Arrays.asList("wh", "takemyheart"), 
+                "lifesteal.player.withdraw" 
         );
     }
 
@@ -46,16 +46,16 @@ public class WithdrawHeartCommand extends CommandBase {
         double currentMaxHP = maxHealthAttribute.getBaseValue();
         double currentHearts = currentMaxHP / Lifesteal.HP_PER_HEART;
 
-        // Calculate how many hearts can actually be withdrawn
+        
         double withdrawableHeartsDouble = currentHearts - Lifesteal.MIN_POSSIBLE_HEARTS;
-        if (withdrawableHeartsDouble < 1.0) { // Cannot withdraw if it would take them to or below min
+        if (withdrawableHeartsDouble < 1.0) { 
             player.sendMessage(ChatColor.RED + "You do not have enough hearts to withdraw. You need to be above " + (int)Lifesteal.MIN_POSSIBLE_HEARTS + " heart(s).");
             return true;
         }
         int maxWithdrawableHearts = (int) Math.floor(withdrawableHeartsDouble);
 
 
-        int heartsToWithdraw = 1; // Default to 1
+        int heartsToWithdraw = 1; 
         if (args.length > 0) {
             try {
                 heartsToWithdraw = Integer.parseInt(args[0]);
@@ -74,12 +74,12 @@ public class WithdrawHeartCommand extends CommandBase {
             return true;
         }
 
-        // Proceed with withdrawal
+        
         double newHearts = currentHearts - heartsToWithdraw;
         double newMaxHP = newHearts * Lifesteal.HP_PER_HEART;
         maxHealthAttribute.setBaseValue(newMaxHP);
 
-        // Adjust current health if it's higher than the new max health
+        
         if (player.getHealth() > newMaxHP) {
             player.setHealth(newMaxHP);
         }
@@ -118,7 +118,7 @@ public class WithdrawHeartCommand extends CommandBase {
                     return Arrays.asList("1", String.valueOf(maxWithdrawableHearts));
                 }
             }
-            return Collections.singletonList("1"); // Default suggestion
+            return Collections.singletonList("1"); 
         }
         return Collections.emptyList();
     }

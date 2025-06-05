@@ -42,7 +42,7 @@ public class ResetPlayerHeartsCommand extends CommandBase {
         }
 
         maxHealthAttribute.setBaseValue(defaultMaxHP);
-        targetPlayer.setHealth(defaultMaxHP); // Heal them to full
+        targetPlayer.setHealth(defaultMaxHP); 
         targetPlayer.sendMessage(ChatColor.YELLOW + "Your maximum hearts have been reset by a server administrator.");
 
         sender.sendMessage(ChatColor.GREEN + "Reset maximum hearts for " + targetPlayer.getName() + " to default (" + (int)Lifesteal.DEFAULT_PLAYER_HEARTS + " hearts).");

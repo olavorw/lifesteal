@@ -6,7 +6,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.olavorw.lifesteal.Lifesteal; // Your main plugin class
+import org.olavorw.lifesteal.Lifesteal; 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -82,14 +82,14 @@ public class GiveHeartCommand extends CommandBase {
     @NotNull
     @Override
     public List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
-        if (!sender.hasPermission(this.getPermission())) { // this.getPermission() gets "lifesteal.admin"
+        if (!sender.hasPermission(this.getPermission())) { 
             return Collections.emptyList();
         }
         if (args.length == 1) {
-            return null; // Let Bukkit handle player name completion
+            return null; 
         }
         if (args.length == 2) {
-            return Arrays.asList("1", "2", "5"); // Suggest some amounts
+            return Arrays.asList("1", "2", "5"); 
         }
         return Collections.emptyList();
     }

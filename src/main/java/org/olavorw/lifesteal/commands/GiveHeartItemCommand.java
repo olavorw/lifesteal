@@ -17,22 +17,22 @@ import java.util.Map;
 public class GiveHeartItemCommand extends CommandBase {
 
     public GiveHeartItemCommand(Lifesteal plugin) {
-        super(plugin, // Plugin instance
-                "giveheartitem", // Command name
-                "Gives a player the custom Heart item.", // Description
-                "/giveheartitem <player> [amount]", // Usage message
-                Arrays.asList("ghi"), // Aliases
-                "lifesteal.admin" // Permission
+        super(plugin, 
+                "giveheartitem", 
+                "Gives a player the custom Heart item.", 
+                "/giveheartitem <player> [amount]", 
+                Arrays.asList("ghi"), 
+                "lifesteal.admin" 
         );
     }
 
     @Override
     public boolean onValidatedCommand(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
-        // Permission check is handled by CommandBase.execute
+        
 
         if (args.length < 1 || args.length > 2) {
-            sender.sendMessage(ChatColor.RED + "Usage: " + this.getUsage()); // getUsage() from Command class
-            return false; // Returning false typically shows the usage message
+            sender.sendMessage(ChatColor.RED + "Usage: " + this.getUsage()); 
+            return false; 
         }
 
         Player targetPlayer = Bukkit.getPlayerExact(args[0]);
@@ -49,7 +49,7 @@ public class GiveHeartItemCommand extends CommandBase {
                     sender.sendMessage(ChatColor.RED + "Amount must be a positive number.");
                     return true;
                 }
-                if (amount > 64) { // Max stack size, can be adjusted
+                if (amount > 64) { 
                     sender.sendMessage(ChatColor.RED + "You can only give up to 64 items at a time.");
                     return true;
                 }
@@ -81,15 +81,15 @@ public class GiveHeartItemCommand extends CommandBase {
     @NotNull
     @Override
     public List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
-        if (!sender.hasPermission("lifesteal.admin")) { // Also check permission for tab complete
+        if (!sender.hasPermission("lifesteal.admin")) { 
             return Collections.emptyList();
         }
         if (args.length == 1) {
-            // Suggest online player names (Bukkit.getOnlinePlayers()... or let default handle)
-            return super.tabComplete(sender, alias, args); // Bukkit's default often handles player names
+            
+            return super.tabComplete(sender, alias, args); 
         }
         if (args.length == 2) {
-            return Arrays.asList("1", "5", "10"); // Suggest some amounts
+            return Arrays.asList("1", "5", "10"); 
         }
         return Collections.emptyList();
     }
