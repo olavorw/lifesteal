@@ -14,7 +14,7 @@ public class Lifesteal extends JavaPlugin {
     
     public static final double DEFAULT_PLAYER_HEARTS = 10.0;
     public static final double MAX_POSSIBLE_HEARTS = 20.0; 
-    public static final double MIN_POSSIBLE_HEARTS = 1.0;  
+    public static final double MIN_POSSIBLE_HEARTS = 0.0;  
     public static final double HP_PER_HEART = 2.0;
 
     @Override

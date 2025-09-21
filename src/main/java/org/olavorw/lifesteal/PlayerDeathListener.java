@@ -37,30 +37,29 @@ public class PlayerDeathListener implements Listener {
         if (victimMaxHealthAttr != null) {
             double currentVictimHP = victimMaxHealthAttr.getBaseValue();
             double currentVictimHearts = currentVictimHP / Lifesteal.HP_PER_HEART;
-            double newVictimHearts = Math.max(Lifesteal.MIN_POSSIBLE_HEARTS, currentVictimHearts - 1.0);
 
-            victimMaxHealthAttr.setBaseValue(newVictimHearts * Lifesteal.HP_PER_HEART);
-            
-            if (victim.getHealth() > newVictimHearts * Lifesteal.HP_PER_HEART) {
-                victim.setHealth(newVictimHearts * Lifesteal.HP_PER_HEART);
-            }
+            double newVictimHeartsRaw = currentVictimHearts - 1.0;
 
-            plugin.getLogger().info(victim.getName() + " lost a heart, now has " + newVictimHearts + " hearts (" + (newVictimHearts * Lifesteal.HP_PER_HEART) + " HP).");
-
-            
-            
-            if (currentVictimHearts <= Lifesteal.MIN_POSSIBLE_HEARTS && newVictimHearts < currentVictimHearts) {
+            if (newVictimHeartsRaw <= 0.0) {
                 String banReason = "You ran out of hearts!";
 
-                
-                
-                victim.ban(banReason, (Date) null, "LifestealPlugin"); 
+                victim.ban(banReason, (Date) null, "LifestealPlugin");
 
-                
                 final Component kickMessage = Component.text(banReason);
                 plugin.getServer().getScheduler().runTask(plugin, () -> victim.kick(kickMessage));
 
                 plugin.getLogger().info(victim.getName() + " ran out of hearts and has been banned by Lifesteal.");
+            } else {
+                double newVictimHearts = Math.max(Lifesteal.MIN_POSSIBLE_HEARTS, newVictimHeartsRaw);
+                double newVictimHP = newVictimHearts * Lifesteal.HP_PER_HEART;
+
+                victimMaxHealthAttr.setBaseValue(newVictimHP);
+
+                if (victim.getHealth() > newVictimHP) {
+                    victim.setHealth(newVictimHP);
+                }
+
+                plugin.getLogger().info(victim.getName() + " lost a heart, now has " + newVictimHearts + " hearts (" + newVictimHP + " HP).");
             }
         }
 
