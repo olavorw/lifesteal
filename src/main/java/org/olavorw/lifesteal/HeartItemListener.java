@@ -28,7 +28,13 @@ public class HeartItemListener implements Listener {
             if (ItemManager.isHeartItem(itemInHand)) {
                 event.setCancelled(true);
 
-                
+                // Validate generation/version of the heart item
+                if (!ItemManager.isValidHeartItem(itemInHand)) {
+                    player.sendMessage(ChatColor.RED + "This Heart item has been invalidated and can no longer be used.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.8f);
+                    return;
+                }
+
                 AttributeInstance maxHealthAttribute = player.getAttribute(Attribute.MAX_HEALTH);
                 if (maxHealthAttribute == null) {
                     player.sendMessage(ChatColor.RED + "Error: Could not access your health attributes.");

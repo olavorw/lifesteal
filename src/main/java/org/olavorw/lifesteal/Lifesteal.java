@@ -22,6 +22,15 @@ public class Lifesteal extends JavaPlugin {
         
         getLogger().info("Lifesteal plugin by Olavorw has been enabled!");
 
+        // Initialize config defaults for heart item generation control
+        getConfig().addDefault("heartItemGeneration", 1);
+        getConfig().addDefault("requireHeartItemGeneration", false);
+        getConfig().options().copyDefaults(true);
+        saveConfig();
+
+        // Initialize item manager (namespaced keys etc.)
+        ItemManager.init(this);
+
         
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         getLogger().info("PlayerDeathListener registered.");
@@ -106,6 +115,13 @@ public class Lifesteal extends JavaPlugin {
             getLogger().warning("Could not register /checkhealth programmatically!");
         }
 
+        boolean invalidateRegistered = Bukkit.getCommandMap().register(this.getDescription().getName().toLowerCase(), new InvalidateHeartItemsCommand(this));
+        if (invalidateRegistered) {
+            getLogger().info("/invalidateheartitems command registered programmatically.");
+        } else {
+            getLogger().warning("Could not register /invalidateheartitems programmatically!");
+        }
+
 
 
     }
@@ -117,7 +133,7 @@ public class Lifesteal extends JavaPlugin {
     }
 
     
-    private void registerHeartRecipe() {
+    public void registerHeartRecipe() {
         ItemStack heartResult = ItemManager.createHeartItem(); 
 
         
